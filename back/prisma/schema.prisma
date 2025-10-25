@@ -1,0 +1,38 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Barbeiro {
+  id        Int      @id @default(autoincrement())
+  name      String
+  telefone  Int      @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cliente {
+  id        Int      @id @default(autoincrement())
+  name      String
+  telefone  Int      @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Agendamento {
+  id         Int      @id @default(autoincrement())
+  clienteId  Int
+  barbeiroId Int
+  dataHora   DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
